@@ -6,6 +6,7 @@ export type MonthData = {
   description: string;
   value: string;
   category: string;
+  valueInDolars: string;
 };
 
 export const getMonthData = async () => {
@@ -25,6 +26,7 @@ export const getMonthData = async () => {
         description: row.get("description"),
         value: row.get("value"),
         category: row.get("category"),
+        valueInDolars: row.get("valueInDolars"),
       };
     });
   } catch (error) {
