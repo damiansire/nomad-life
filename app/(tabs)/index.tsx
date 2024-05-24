@@ -4,7 +4,7 @@ import EditScreenInfo from "@/components/EditScreenInfo";
 import { Text, View } from "@/components/Themed";
 import { MonthData, getMonthData } from "@/services/account";
 import { useEffect, useState } from "react";
-import TransactionTable from "@/components/TransactionTable";
+import TransactionList from "@/components/TransactionList";
 
 export default function TabOneScreen() {
   const [monthTransactions, setMonthTransactions] = useState<MonthData[]>([]);
@@ -21,11 +21,11 @@ export default function TabOneScreen() {
       <View
         style={styles.separator}
         lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
+        darkColor="yellow"
       />
-      <TransactionTable
+      <TransactionList
         monthTransactions={monthTransactions}
-      ></TransactionTable>
+      ></TransactionList>
     </View>
   );
 }
