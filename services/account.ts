@@ -19,7 +19,8 @@ export const getMonthData = async () => {
     await doc.loadInfo();
     const sheet = doc.sheetsByIndex[0];
     const rows = await sheet.getRows<MonthData>();
-    return rows.map((row) => {
+
+    const filteredRows = rows.map((row) => {
       return {
         date: row.get("date"),
         currency: row.get("currency"),
@@ -28,6 +29,17 @@ export const getMonthData = async () => {
         category: row.get("category"),
         valueInDolars: row.get("valueInDolars"),
       };
+    });
+
+    return filteredRows.filter(row => {
+      return (
+        row.date !== "" &&
+        row.currency !== "" &&
+        row.description !== "" &&
+        row.value !== "" &&
+        row.category !== "" &&
+        row.valueInDolars !== ""
+      );
     });
   } catch (error) {
     console.log("api key:", process.env.EXPO_PUBLIC_GOOGLE_API_KEY);

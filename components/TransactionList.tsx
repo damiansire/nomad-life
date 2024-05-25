@@ -1,25 +1,51 @@
 import React from "react";
-import { View, Text } from "./Themed";
+import { View } from "./Themed";
 import { MonthData } from "@/services/account";
-import { Divider } from "react-native-paper";
+import { Avatar, Card, Divider, IconButton } from "react-native-paper";
+import { Text } from "react-native-paper";
 
 type TransactionListProps = {
   monthTransactions: MonthData[];
 };
 
+const CategoryIcon = (props: any) => {
+  const categoryIcons: { [key: string]: string } = {
+    Antojos: "candy",
+    Transporte: "train-car",
+    Comida: "food",
+    ComidaSana: "food-apple",
+    Alquile: "home",
+  };
+  let iconId = categoryIcons[props.category] ?? "folder";
+
+  return <Avatar.Icon {...props} icon={iconId} />;
+};
+
 const TransactionList = ({ monthTransactions }: TransactionListProps) => {
   return (
-    <View darkColor="red">
-      {monthTransactions.map((element) => {
+    <View  style={{ width: "100%" }}>
+      {monthTransactions.map((element, index) => {
         return (
-          <><View key={element.description} darkColor="blue">
-            <Text>{element.date}</Text>
-            <Text>{element.currency}</Text>
-            <Text>{element.description}</Text>
-            <Text>{element.value}</Text>
-            <Text>{element.category}</Text>
-            <Text>{element.valueInDolars}</Text>
-          </View><Divider /></>
+          <View key={index} darkColor="gray">
+            <Card.Title 
+              title={element.description}
+              left={(props) => (
+                <CategoryIcon {...props} category={element.category} />
+              )}
+              right={(props) => {
+                return (
+                  <View darkColor="gray">
+                    <Text variant="headlineSmall">
+                      {" "}
+                      USD {parseFloat(element.valueInDolars).toFixed(2)}
+                    </Text>
+                  </View>
+                );
+              }}
+            />
+            <Divider />
+            
+          </ View>
         );
       })}
     </View>
