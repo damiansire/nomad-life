@@ -9,6 +9,12 @@ export type MonthData = {
   valueInDolars: string;
 };
 
+export type MoneyFlow = {
+  day: string;
+  moneyFlow: string;
+  spent: string;
+};
+
 export const getMonthData = async () => {
   try {
     const sheetId = process.env.EXPO_PUBLIC_MONTH_DATA_SHEET_ID || "";
@@ -18,9 +24,9 @@ export const getMonthData = async () => {
     });
     await doc.loadInfo();
     const sheet = doc.sheetsByIndex[0];
-    const rows = await sheet.getRows<MonthData>();
 
-    const filteredRows = rows.map((row) => {
+    const rows = await sheet.getRows<any>();
+    const transactionsRows : MonthData[] = rows.map((row) => {
       return {
         date: row.get("date"),
         currency: row.get("currency"),
@@ -31,7 +37,7 @@ export const getMonthData = async () => {
       };
     });
 
-    return filteredRows.filter(row => {
+    const filteredTransactionsRows = transactionsRows.filter((row) => {
       return (
         row.date !== "" &&
         row.currency !== "" &&
@@ -41,6 +47,19 @@ export const getMonthData = async () => {
         row.valueInDolars !== ""
       );
     });
+
+    const diaryFlowMoney : MoneyFlow[] = rows.map((row) => {
+      return {
+        day: row.get("Dia"),
+        spent: row.get("Egresos en dolares"),
+        moneyFlow: row.get("Saldo neto"),
+      };
+    });
+
+    return {
+      transactionsRows: filteredTransactionsRows,
+      diaryFlowMoney
+    };
   } catch (error) {
     console.log("api key:", process.env.EXPO_PUBLIC_GOOGLE_API_KEY);
     console.log("error", error);
