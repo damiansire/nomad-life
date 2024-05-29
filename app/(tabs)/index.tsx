@@ -4,16 +4,8 @@ import { MoneyFlow, MonthData, getMonthData } from "@/services/account";
 import { useEffect, useState } from "react";
 import TransactionList from "@/components/TransactionList";
 import { Avatar, Card, IconButton } from "react-native-paper";
+import DateWizard from "date-wizard-pro";
 
-const getTodayDate = () => {
-  const hoy = new Date();
-  const dia = String(hoy.getDate()).padStart(2, "0"); // Agrega un cero a la izquierda si es necesario
-  const mes = String(hoy.getMonth() + 1).padStart(2, "0"); // Los meses van de 0 a 11
-  const anio = hoy.getFullYear();
-  const fechaFormateada = `${dia}/${mes}/${anio}`;
-
-  return fechaFormateada;
-};
 
 const Statistic = ({ title, value }: { title: string; value: string }) => {
   return (
@@ -39,7 +31,7 @@ const Statistics = ({ data }: { data: any }) => {
 };
 
 export default function TabOneScreen() {
-  const [selectedDay, setSelectedDay] = useState<string>(getTodayDate());
+  const [selectedDay, setSelectedDay] = useState<string>(DateWizard.getTodayDate());
   const [dayData, setDayData] = useState<any>({ date: "" });
   const [diaryFlowMoney, setDiaryFlowMoney] = useState<MoneyFlow[]>([]);
   const [monthTransactions, setMonthTransactions] = useState<MonthData[]>([]);
@@ -54,7 +46,7 @@ export default function TabOneScreen() {
 
   useEffect(() => {
     const selectedDayData = diaryFlowMoney.find(
-      (x) => x.day === getTodayDate()
+      (x) => x.day === DateWizard.getTodayDate()
     );
     setDayData(selectedDayData);
   }, [diaryFlowMoney]);
