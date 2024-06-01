@@ -29,7 +29,13 @@ const Statistics = ({ data }: { data: any }) => {
   );
 };
 
-const DateHandle = ({ selectedDay, setSelectedDay }: { selectedDay: string; setSelectedDay: Dispatch<SetStateAction<string>> }) => {
+const DateHandle = ({
+  selectedDay,
+  setSelectedDay,
+}: {
+  selectedDay: string;
+  setSelectedDay: Dispatch<SetStateAction<string>>;
+}) => {
   return (
     <View
       style={{
@@ -42,7 +48,9 @@ const DateHandle = ({ selectedDay, setSelectedDay }: { selectedDay: string; setS
       <Button
         icon="arrow-left"
         mode="contained"
-        onPress={() => { setSelectedDay(DateWizard.subtractDays(selectedDay, 1)) }}
+        onPress={() => {
+          setSelectedDay(DateWizard.subtractDays(selectedDay, 1));
+        }}
       >
         Prev
       </Button>
@@ -50,7 +58,9 @@ const DateHandle = ({ selectedDay, setSelectedDay }: { selectedDay: string; setS
       <Button
         icon="arrow-right"
         mode="contained"
-        onPress={() => {  setSelectedDay(DateWizard.addDays(selectedDay, 1))}}
+        onPress={() => {
+          setSelectedDay(DateWizard.addDays(selectedDay, 1));
+        }}
       >
         Next
       </Button>
@@ -81,21 +91,25 @@ export default function TabOneScreen() {
     setDayData(selectedDayData);
   }, [diaryFlowMoney]);
   return (
-    <View style={styles.container}>
-      <DateHandle selectedDay={selectedDay} setSelectedDay={setSelectedDay}></DateHandle>
-      <Statistics data={dayData}></Statistics>
-      <View style={styles.separator} lightColor="#eee" darkColor="yellow" />
-      <TransactionList monthTransactions={monthTransactions}></TransactionList>
+    <View>
+      <View>
+        <DateHandle
+          selectedDay={selectedDay}
+          setSelectedDay={setSelectedDay}
+        ></DateHandle>
+      </View>
+      <View style={{backgroundColor: "red", height: "100%"}}>
+        <Statistics data={dayData}></Statistics>
+        <View style={styles.separator} lightColor="#eee" darkColor="yellow" />
+        <TransactionList
+          monthTransactions={monthTransactions}
+        ></TransactionList>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
   title: {
     fontSize: 20,
     fontWeight: "bold",
