@@ -1,27 +1,53 @@
 # NomadLife
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.2.
+# Run
 
-## Development server
+Run in mobile:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```
+npm run mobile
+```
 
-## Code scaffolding
+Run in pwa:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+npm run pwa
+```
 
-## Build
+# Folder Structure:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+**Key Points:**
 
-## Running unit tests
+- **`app/`:** The heart of your application, housing the main module and its submodules.
+  - **`core/`:** Essential services (e.g., logging, configuration), guards, and interceptors that are used throughout the application.
+    - **`authentication/`:** Services and guards related to user authentication and authorization.
+    - **`http/`:** Interceptors to handle HTTP requests and responses globally.
+    - **`services/`:** Other core services that provide common functionalities.
+  - **`shared/`:** Reusable components, directives, pipes, and utility functions.
+    - **`components/`:** Generic components like buttons, modals, and other UI elements.
+    - **`directives/`:** Custom directives to enhance HTML elements with additional behavior.
+    - **`pipes/`:** Custom pipes to transform data for display in templates.
+    - **`utils/`:** Helper functions and utilities used across the application.
+  - **`features/`:** Modules dedicated to specific features or functionalities of your app.
+    - **`home/`:** Module responsible for the home page.
+      - **`components/`:** Components specific to the home page.
+      - **`pages/`:** Main content pages within the home feature.
+      - **`services/`:** Services related to the home page functionality.
+      - **`home.module.ts`:** Module definition for the home feature.
+    - **`finances/`:** Module responsible for managing product-related features.
+      - **(Similar structure to `home/`)**
+    - **`...`:** Other feature modules following a similar structure.
+  - **`app-routing.module.ts`:** Module for defining routes and navigation within the application.
+  - **`app.component.ts`:** Root component of the application.
+  - **`app.module.ts`:** Main application module that bootstraps the app.
+- **`assets/`:** Static resources like images, fonts, and other files.
+- **`environments/`:** Configuration files for different environments (development, production, etc.).
+- **`index.html`:** The main HTML entry point for your Angular application.
+- **`main.ts`:** The main TypeScript file that bootstraps the Angular application.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+**Benefits:**
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **Scalability:** Easily add new features by creating new feature modules.
+- **Organization:** Clear and intuitive folder structure for better maintainability.
+- **Reusability:** Promotes code reusability through shared components and modules.
+- **Maintainability:** Each feature module is self-contained, making it easier to test and manage.
