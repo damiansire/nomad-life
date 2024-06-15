@@ -1,5 +1,17 @@
 <mat-tab-group>
-    <mat-tab label="Transactions"> <app-transactions-page></app-transactions-page> </mat-tab>
-    <mat-tab label="Statics"> <app-statistics-page></app-statistics-page> </mat-tab>
-    <mat-tab label="Exchanges"> <app-exchanges-page></app-exchanges-page> </mat-tab>
+  <mat-tab label="Transactions">
+    <ng-template matTabContent>
+      <app-transactions-page></app-transactions-page>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Statics">
+    <ng-template matTabContent>
+      <app-statistics-page></app-statistics-page>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Exchanges">
+    <ng-template matTabContent>
+      <app-exchanges-page></app-exchanges-page>
+    </ng-template>
+  </mat-tab>
 </mat-tab-group>
